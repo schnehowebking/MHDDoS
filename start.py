@@ -36,6 +36,7 @@ from requests import Response, Session, exceptions, get, cookies
 from yarl import URL
 from base64 import b64encode
 import secrets
+from security import safe_command
 
 basicConfig(format='[%(asctime)s - %(levelname)s] %(message)s',
             datefmt="%H:%M:%S")
@@ -1198,8 +1199,7 @@ class HttpFlood(Thread):
             if proxy.type != ProxyType.SOCKS4:
                 break
 
-        res = run(
-            [
+        res = safe_command.run(run, [
                 f'{bombardier_path}',
                 f'--connections={self._rpc}',
                 '--http2',
