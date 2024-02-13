@@ -1500,7 +1500,7 @@ class ToolsConsole:
     # noinspection PyUnreachableCode
     @staticmethod
     def info(domain):
-        with suppress(Exception), get(f"https://ipwhois.app/json/{domain}/") as s:
+        with suppress(Exception), get(f"https://ipwhois.app/json/{domain}/", timeout=60) as s:
             return s.json()
         return {"success": False}
 
